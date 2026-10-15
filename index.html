@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cerdas Cermat Islami</title>
+    <meta
+      name="description"
+      content="Game edukasi interaktif Cerdas Cermat Islami untuk menambah pengetahuan agama Islam."
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand-wrap">
+          <div class="brand-icon">✦</div>
+          <div>
+            <p class="eyebrow">Game Edukasi</p>
+            <h1>CERDAS CERMAT ISLAMI</h1>
+          </div>
+        </div>
+        <button id="soundToggle" class="sound-toggle" type="button" aria-label="Matikan atau hidupkan suara">
+          🔊 Suara: Nyala
+        </button>
+      </header>
+
+      <main class="main-panel">
+        <section id="homeScreen" class="screen active" aria-live="polite">
+          <div class="hero-card">
+            <div class="hero-badge">Belajar sambil bermain</div>
+            <h2>Siap menguji ilmu Islammu?</h2>
+            <p>
+              Jelajahi berbagai kategori islami, jawab soal dengan cepat, dan raih skor tertinggi di
+              permainan cerdas cermat yang seru dan edukatif.
+            </p>
+            <div class="hero-actions">
+              <button id="startGameBtn" class="primary-btn" type="button">Mulai Bermain</button>
+              <button id="howToPlayBtn" class="secondary-btn" type="button">Cara Bermain</button>
+              <button id="viewHighScoreBtn" class="secondary-btn" type="button">Rekor Saya</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="categoryScreen" class="screen" aria-live="polite">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Langkah 1</p>
+              <h2>Pilih Kategori</h2>
+            </div>
+            <button id="backToHomeFromCategory" class="ghost-btn" type="button">Beranda</button>
+          </div>
+          <div id="categoryGrid" class="option-grid" aria-label="Pilihan kategori"></div>
+        </section>
+
+        <section id="difficultyScreen" class="screen" aria-live="polite">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Langkah 2</p>
+              <h2>Pilih Tingkat Kesulitan</h2>
+            </div>
+            <button id="backToCategory" class="ghost-btn" type="button">Kembali</button>
+          </div>
+          <div id="difficultyGrid" class="option-grid" aria-label="Pilihan tingkat kesulitan"></div>
+        </section>
+
+        <section id="gameScreen" class="screen" aria-live="polite">
+          <div class="game-topbar">
+            <div class="progress-wrap">
+              <div class="progress-labels">
+                <span id="questionCounter">Soal 1/10</span>
+                <span id="scoreDisplay">Skor: 0</span>
+              </div>
+              <div class="progress-bar">
+                <div id="progressFill" class="progress-fill"></div>
+              </div>
+            </div>
+            <div class="timer-box">
+              <span class="timer-label">Waktu</span>
+              <strong id="timerDisplay">20s</strong>
+            </div>
+          </div>
+
+          <div class="question-card">
+            <div class="category-pill" id="categoryBadge">Kategori</div>
+            <h3 id="questionText">Pertanyaan</h3>
+            <div id="optionsContainer" class="options-container" role="list"></div>
+            <div id="feedbackBox" class="feedback-box hidden" aria-live="assertive"></div>
+            <div class="action-row">
+              <button id="nextQuestionBtn" class="primary-btn hidden" type="button">Soal Berikutnya</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="resultScreen" class="screen" aria-live="polite">
+          <div class="result-card">
+            <div class="result-badge">Hasil Permainan</div>
+            <h2 id="finalTitle">Selesai!</h2>
+            <div class="score-ring">
+              <div>
+                <span id="finalScore">0</span>
+                <small>Skor</small>
+              </div>
+            </div>
+            <div class="stats-grid">
+              <div class="stat-item">
+                <span>Benar</span>
+                <strong id="correctCount">0</strong>
+              </div>
+              <div class="stat-item">
+                <span>Salah</span>
+                <strong id="wrongCount">0</strong>
+              </div>
+              <div class="stat-item">
+                <span>Tak Terjawab</span>
+                <strong id="unansweredCount">0</strong>
+              </div>
+              <div class="stat-item">
+                <span>Ketepatan</span>
+                <strong id="accuracyCount">0%</strong>
+              </div>
+            </div>
+            <div class="result-actions">
+              <button id="playAgainBtn" class="primary-btn" type="button">Main Lagi</button>
+              <button id="chooseCategoryBtn" class="secondary-btn" type="button">Pilih Kategori</button>
+              <button id="homeBtn" class="secondary-btn" type="button">Kembali ke Beranda</button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="infoModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="infoTitle">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="infoTitle">Cara Bermain</h3>
+          <button id="closeModalBtn" class="icon-close" type="button" aria-label="Tutup">✕</button>
+        </div>
+        <div class="modal-body">
+          <ol>
+            <li>Pilih kategori yang ingin diujikan.</li>
+            <li>Pilih tingkat kesulitan sesuai kemampuanmu.</li>
+            <li>Jawab 10 soal dalam waktu 20 detik per soal.</li>
+            <li>Jawaban benar mendapat +10 poin.</li>
+            <li>Skor tertinggi akan tersimpan otomatis di browser.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <script src="questions.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
